@@ -1,0 +1,1006 @@
+* {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    background-color: #fff;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #5f6368;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.container {
+    padding: 24px 22px 70px;
+    width: 100%;
+}
+
+.install-btn__install {
+    background: #afb1b3;
+}
+
+.container.container--landing-page .install-btn__install,
+.container:not(.container--landing-page)[data-type=INSTALL] .install-btn__ing,
+.container:not(.container--landing-page)[data-type=LANDING_PAGE] .install-btn__install {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.container:not(.container--landing-page)[data-type=INSTALLING] .install-btn {
+    opacity: .4;
+}
+
+.container:not(.container--landing-page)[data-type=INSTALLING] .install-btn__ing {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.container:not(.container--landing-page)[data-type=INSTALLING] .header__icon--img {
+    height: 34px;
+    width: 34px;
+}
+
+.container:not(.container--landing-page)[data-type=INSTALLING] .header__icon--loading {
+    opacity: 1;
+    visibility: visible;
+}
+
+.container:not(.container--landing-page)[data-type=PLAY] .install-btn__play {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.container:not(.container--landing-page)[data-type=INSTALLING] .header__info-description,
+.container:not(.container--landing-page)[data-type=PLAY] .header__info-description {
+    display: none;
+}
+
+.container:not(.container--landing-page)[data-type=INSTALLING] .header__info-progress,
+.container:not(.container--landing-page)[data-type=PLAY] .header__info-progress {
+    display: block;
+}
+
+.container:not(.container--landing-page)[data-type=DOWNLOAD] .install-btn__download {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.header {
+    margin-bottom: 28px;
+}
+
+.header,
+.header__icon {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.header__icon {
+    height: 74px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-right: 22px;
+    position: relative;
+    width: 74px;
+}
+
+.header__icon--img {
+    border-radius: 8px;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    transition: all .35s;
+    width: 100%;
+}
+
+.header__icon--loading {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -ms-flex-pack: center;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    width: 100%;
+    z-index: 5;
+}
+
+.header__icon--loading svg {
+    animation: loading-rotate 2s linear infinite;
+    color: #028760;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.header__icon--loading svg circle {
+    stroke: currentColor;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    animation: loading-circular 1.5s ease-in-out infinite;
+}
+
+.header__info {
+    -ms-flex: 1;
+    flex: 1;
+    overflow: hidden;
+}
+
+.header__info-title {
+    color: #111;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 33px;
+    margin-bottom: 2px;
+}
+
+.header__info-description {
+    color: #028760;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 23px;
+}
+
+.header__info-progress {
+    color: #333;
+    display: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    margin-bottom: 3px;
+}
+
+.header__info-play {
+    -ms-flex-align: center;
+    align-items: center;
+    color: #333;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 10px;
+    font-weight: 400;
+    height: 14px;
+}
+
+.header__info-play .ic_dun {
+    margin-right: 4px;
+    width: 10px;
+}
+
+.info {
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 38px;
+}
+
+.info__view {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1;
+    flex: 1;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+}
+
+.info__view:before {
+    background: #ebebeb;
+    bottom: 0;
+    content: "";
+    height: 24px;
+    left: 0;
+    margin: auto 0;
+    position: absolute;
+    top: 0;
+    width: 1px;
+}
+
+.info__view:first-child:before {
+    display: none;
+}
+
+.info__view .ic_x {
+    display: block;
+    margin-left: 2px;
+    width: 11px;
+}
+
+.info__view-value {
+    color: #111;
+    font-size: 13px;
+    line-height: 19px;
+}
+
+.info__view-sui,
+.info__view-value {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.info__view-sui {
+    border: 1px solid #020202;
+    border-radius: 2px;
+    color: #020202;
+    font-size: 10px;
+    height: 16px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    line-height: 14px;
+    min-width: 17px;
+    padding: 0 2px;
+}
+
+.info__view-label {
+    color: #5d5d5d;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17px;
+}
+
+.install-btn {
+    background: #028760;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.install-btn__view {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    height: 35px;
+    line-height: 20px;
+    width: 100%;
+}
+
+.install-btn__ing,
+.install-btn__view {
+    -ms-flex-align: center;
+    align-items: center;
+    display: none;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.install-btn__ing {
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 8px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.install-btn__ing__rapid {
+    -ms-flex-align: center;
+    align-items: center;
+    color: #ffe336;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 15px;
+    font-weight: 500;
+    -ms-flex-pack: center;
+    justify-content: center;
+    line-height: 21px;
+}
+
+.install-btn__ing__rapid img {
+    display: block;
+    margin-right: 4px;
+    width: 12px;
+}
+
+.install-btn__ing__countdown {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17px;
+}
+
+.img-scroll {
+    margin-top: 50px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+}
+
+.google-share-btns {
+    margin-top: 15px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #01875f;
+    gap: 20px;
+}
+
+.google-share-btns li {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.google-share-btns svg {
+    fill: #01875f;
+}
+
+.img-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.img-scroll__list {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    height: 224px;
+    width: fit-content;
+}
+
+.img-scroll__view {
+    border-radius: 8px;
+    height: 224px;
+    margin-right: 11px;
+    overflow: hidden;
+}
+
+.img-scroll__view img {
+    display: block;
+    height: 100%;
+    width: auto;
+}
+
+.description__title {
+    color: #222;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+
+.description__content {
+    color: #666;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 19px;
+    margin-bottom: 34px;
+    word-break: break-all;
+}
+
+.description__data-safety {
+    border: 1px solid #787878;
+    border-radius: 7px;
+    padding: 24px 26px 8px;
+    width: 100%;
+}
+
+.description__data-safety__item {
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.description__data-safety__item .item-icon {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    height: 20px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-right: 16px;
+    width: 20px;
+}
+
+.description__data-safety__item .item-icon img {
+    display: block;
+}
+
+.description__data-safety__item .item-content {
+    -ms-flex: 1;
+    flex: 1;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.description__data-safety__item .item-content p {
+    color: #444;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 23px;
+}
+
+.shiny-btn:after {
+    animation: shiny-btn-anim 5s ease-in-out infinite;
+    background-color: #fff;
+    content: "";
+    display: inline-block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: -180px;
+    width: 30px;
+}
+
+@keyframes shiny-btn-anim {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(45deg);
+    }
+
+    80% {
+        opacity: .5;
+        transform: scale(0) rotate(45deg);
+    }
+
+    81% {
+        opacity: 1;
+        transform: scale(4) rotate(45deg);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(50) rotate(45deg);
+    }
+}
+
+#rb-layer {
+    display: block !important;
+}
+
+#rb-layer img {
+    max-height: none;
+    max-width: none;
+}
+
+#rb-layer .animation-dialog {
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#rb-layer .animation-dialog.dialog-visible {
+    animation-name: rb-fade-in;
+}
+
+#rb-layer .animation-dialog.dialog-hidden {
+    animation-duration: .15s;
+    animation-name: rb-fade-out;
+}
+
+#rb-layer .rb-mask {
+    animation-duration: .35s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    background: rgba(0, 0, 0, 0.6);
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    visibility: hidden;
+    width: 100%;
+    z-index: 1000;
+}
+
+#rb-layer .rb-mask p {
+    display: none;
+    font-size: 0;
+}
+
+#rb-layer .rb-mask-show {
+    animation-name: rb-fade-in;
+}
+
+#rb-layer .rb-mask-hide {
+    animation-name: rb-fade-out;
+}
+
+#rb-layer .rb-toast {
+    animation-duration: .35s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+    left: 50%;
+    line-height: 36px;
+    max-width: 90%;
+    min-width: 48px;
+    opacity: 0;
+    padding: 0 10px;
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    white-space: pre;
+    width: fit-content;
+    z-index: 1000;
+}
+
+#rb-layer .rb-toast-show {
+    animation-name: rb-fade-in;
+}
+
+#rb-layer .rb-toast-hide {
+    animation-name: rb-fade-out;
+}
+
+#rb-layer .rb-toast span {
+    color: #fff;
+    font-size: 16px;
+}
+
+#rb-layer .rb-loading {
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    color: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    font-size: 14px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    left: 0;
+    line-height: 20px;
+    margin: 0 auto;
+    max-height: 100%;
+    max-width: 70%;
+    min-height: 100px;
+    opacity: 0;
+    overflow: hidden;
+    padding: 16px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    transition: all .2s;
+    visibility: hidden;
+    white-space: pre-wrap;
+    width: 100px;
+    z-index: 1005;
+}
+
+#rb-layer .rb-loading--show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#rb-layer .rb-loading__text {
+    min-height: 0;
+    min-width: 100px;
+    padding: 8px 12px;
+    width: fit-content;
+}
+
+#rb-layer .rb-loading__icon {
+    animation: loading-rotate 2s linear infinite;
+    display: -ms-flexbox;
+    display: flex;
+    height: 30px;
+    margin-bottom: 8px;
+    width: 30px;
+}
+
+#rb-layer .rb-loading__icon svg {
+    color: #fff;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+#rb-layer .rb-loading__icon svg circle {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    animation: loading-circular 1.5s ease-in-out infinite;
+}
+
+#rb-layer .rb-install-now-dialog {
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    left: 0;
+    margin: 0 auto;
+    opacity: 0;
+    padding: 32px 24px 24px;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    visibility: hidden;
+    width: 325px;
+    z-index: 1000;
+}
+
+#rb-layer .rb-install-now-dialog[data-type=ACTIVED] .install-now__actived,
+#rb-layer .rb-install-now-dialog[data-type=LOADING] .install-now__loading {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__header {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 37px;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__header-title {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 8px;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__header-title img {
+    margin-right: 7px;
+    width: 28px;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__header-title span {
+    color: #666;
+    font-size: 27px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 33px;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__header-msg {
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid #747475;
+    border-radius: 3px;
+    color: #666;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 18px;
+    font-weight: 400;
+    height: 25px;
+    padding: 0 10px;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__main {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 108px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__loading {
+    -ms-flex-align: center;
+    align-items: center;
+    color: #028760;
+    display: none;
+    height: 100px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+    width: 100px;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__loading svg {
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__loading svg circle {
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    animation: loading-circular 1.5s ease-in-out infinite;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__loading span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__actived {
+    -ms-flex-align: center;
+    align-items: center;
+    display: none;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__actived-tag {
+    -ms-flex-align: center;
+    align-items: center;
+    background: rgba(2, 135, 96, 0.1);
+    border: 1px solid #028760;
+    border-radius: 14px;
+    display: -ms-flexbox;
+    display: flex;
+    height: 28px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-bottom: 34px;
+    padding: 0 11px;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__actived-tag img {
+    margin-right: 5px;
+    width: 15px;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__actived-tag span {
+    color: #028760;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+#rb-layer .rb-install-now-dialog .install-now__actived-btn {
+    -ms-flex-align: center;
+    align-items: center;
+    background: #028760;
+    border-radius: 8px;
+    color: #fff;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 15px;
+    font-weight: 500;
+    height: 45px;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#rb-layer .rb-install-dialog {
+    background-color: #fff;
+    border-radius: 18px;
+    left: 0;
+    margin: 0 auto;
+    opacity: 0;
+    padding: 24px;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    visibility: hidden;
+    width: 353px;
+    z-index: 1000;
+}
+
+#rb-layer .rb-install-dialog .install__title {
+    color: #111;
+    font-size: 26px;
+    line-height: 32px;
+    margin-bottom: 28px;
+}
+
+#rb-layer .rb-install-dialog .install__main {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 32px;
+    width: 100%;
+}
+
+#rb-layer .rb-install-dialog .install__main--icon {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.16);
+    height: 37px;
+    margin-right: 12px;
+    width: 37px;
+}
+
+#rb-layer .rb-install-dialog .install__main--title {
+    color: #111;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 27px;
+}
+
+#rb-layer .rb-install-dialog .install__main--url {
+    color: #111;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19px;
+}
+
+#rb-layer .rb-install-dialog .install__foot {
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding-right: 10px;
+    width: 100%;
+}
+
+#rb-layer .rb-install-dialog .install__foot div {
+    color: #3f80ed;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: center;
+    width: 94px;
+}
+
+@keyframes rb-fade-in {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes rb-fade-out {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes loading-rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+@keyframes loading-circular {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -40;
+    }
+
+    to {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -120;
+    }
+}
+
+.template-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    height: 56px;
+    background-color: #fff;
+    border-top: 1px solid #dadce0;
+}
+
+.template-footer ul {
+    display: -ms-flexbox;
+    display: flex;
+    height: 56px;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.template-footer ul li {
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+    overflow: hidden;
+}
+
+.template-footer ul li a {
+    color: #5f6368;
+}
+
+.template-footer ul li a:hover,
+.template-footer ul li.active a {
+    color: #01875f;
+}
+
+.template-footer ul li a:hover img,
+.template-footer ul li.active a img {
+    filter: drop-shadow(#01875f 80px 0);
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    -ms-transform: translateX(-80px);
+    transform: translateX(-80px);
+}
+
+.template-footer ul li p {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto 2px;
+    overflow: hidden;
+}
+
+.template-footer ul span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

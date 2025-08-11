@@ -1,0 +1,280 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Akpoker">
+    <meta name="apple-mobile-web-app-title" content="Akpoker">
+    <meta name="theme-color" content="#0b0d11">
+    <meta name="msapplication-navbutton-color" content="#0b0d11">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Akpoker - Online Chess And Card Game</title>
+    <link href="./images/download/landing-pwa.css" rel="stylesheet">
+
+    <!-- pwa -->
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" href="./icons/favicon.ico" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // 监听pwa的安装事件
+            let deferredPrompt = null;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // 阻止浏览器默认的安装提示
+                e.preventDefault();
+
+                // 保存事件，后续调用
+                deferredPrompt = e;
+            });
+
+            // 安装到桌面
+            async function installToDesktop () {
+                if (!deferredPrompt) {
+                    console.log('安装事件不存在');
+                    return;
+                }
+
+                // 显示安装提示框
+                deferredPrompt.prompt();
+
+                // 等待用户响应
+                const choiceResult = await deferredPrompt.userChoice;
+
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('用户接受安装');
+                } else {
+                    console.log('用户拒绝安装');
+                }
+
+                // 安装事件只能用一次，清空
+                deferredPrompt = null;
+            }
+
+
+            // 点击下载按钮，判断ios或者安卓
+            document.getElementById("download_btn").addEventListener("click", async (e) => {
+                // 判断是否pwa模式
+                if (!window.matchMedia('(display-mode: standalone)').matches && !window.navigator.standalone === true) {
+                    const ua = navigator.userAgent || navigator.vendor || window.opera;
+                    if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+                        // ios
+                        window.location.href = './iosDownload.html'
+                    } else if (/android/i.test(ua)) {
+                        // android
+                        installToDesktop()
+                    } else {
+                        // browser
+                        installToDesktop()
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container" data-type="INSTALL" id="container">
+        <div class="header">
+            <div class="header__icon">
+                <img alt="" class="header__icon--img" src="./images/download/logo.png">
+                <div class="header__icon--loading" id="iconLoading"><svg viewBox="25 25 50 50">
+                        <circle cx="50" cy="50" fill="none" r="20"></circle>
+                    </svg></div>
+            </div>
+            <div class="header__info">
+                <h1 class="header__info-title">
+                    Akpoker - Online Chess And Card Game
+                </h1>
+                <p class="header__info-description" data-checking="" id="ads_checking">Akpoker</p>
+                <p class="header__info-progress" id="installProgress">100%</p>
+                <p class="header__info-play"><img alt="" class="ic_dun" src="./images/download/ic_dun.png">
+                    Verified by Play Protect
+                </p>
+            </div>
+        </div>
+        <div class="info">
+            <div class="info__view">
+                <div class="info__view-value">4.9 <img alt="" class="ic_x" src="./images/download/ic_x.png"></div>
+                <div class="info__view-label" data-t="number_of_comments.K" data-tp="num=14.3">
+                    14.3K reviews
+                </div>
+            </div>
+            <div class="info__view">
+                <div class="info__view-value" data-t="downloads.million" data-tp="num=6.5">6.5 M+</div>
+                <div class="info__view-label">
+                    Downloads
+                </div>
+            </div>
+            <div class="info__view">
+                <div class="info__view-sui">18+</div>
+                <div class="info__view-label">18+</div>
+            </div>
+        </div>
+        <div class="install-btn shiny-btn" id="install-btn">
+            <div class="install-btn__ing" id="download_btn">
+                <div class="install-btn__ing__rapid">
+                    <img alt="" class="ic_x" src="./images/download/ic_sd.png">
+                    <span data-t="rapid_install">
+                        Rapid Install
+                    </span>
+                </div>
+                <div class="install-btn__ing__countdown" id="install-btn-countdown">
+                    <span data-t="download_in">
+                        Download in
+                    </span>
+                    <span class="countdown-num">10</span>s
+                </div>
+            </div>
+        </div>
+        <ul class="google-share-btns">
+            <li>
+                <svg class="f70z8e" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z">
+                    </path>
+                </svg>
+                <span>
+                    Share
+                </span>
+            </li>
+            <li>
+                <svg class="XkAcee" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M7 3H17C18.1045 3 19 3.8955 19 5V21L12 18L5 21L5.01075 5C5.01075 3.8955 5.8965 3 7 3ZM12 15.824L17 18V5H7V18L12 15.824ZM13 7V9H15V11H13V13H11V11H9V9H11V7H13Z">
+                    </path>
+                </svg>
+                <span>
+                    Add to wishlist
+                </span>
+            </li>
+        </ul>
+        <div class="img-scroll">
+            <div class="img-scroll__list" id="img-container">
+                <div class="img-scroll__view">
+                    <img alt="" src="./images/download/screenshot1.png">
+                </div>
+                <div class="img-scroll__view">
+                    <img alt="" src="./images/download/screenshot2.png">
+                </div>
+                <div class="img-scroll__view">
+                    <img alt="" src="./images/download/screenshot3.png">
+                </div>
+                <div class="img-scroll__view">
+                    <img alt="" src="./images/download/screenshot4.png">
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <div class="description__title" data-t="about_this_app">
+                About this app
+            </div>
+            <div class="description__content" id="description-content">
+                <p> Do you love playing the lottery? Do you want access to the latest lottery results from around the
+                    world? Are you tired of searching numerous websites for the lottery information?</p>
+                <p> Akpoker is exactly what every enthusiastic lottery player needs. Download the FREE Akpoker app
+                    and get the entire lottery world in the palm of your hands.</p>
+                <p> Come and claim 100% DEPOSIT BONUS + FREE tickets to kick off your adventure in Akpoker!</p>
+                <p> Come and play now!</p>
+
+            </div>
+        </div>
+        <div class="description">
+            <div class="description__title">
+                Data safety
+            </div>
+            <div class="description__content">
+                Safety starts with understanding how developers collect and share your data.Data pricacy and security
+                practices may vary based on your use,region and age. The developer provided this information and may
+                update it over time.</div>
+            <div class="description__data-safety">
+                <div class="description__data-safety__item">
+                    <div class="item-icon"><img alt="" src="./images/download/ic_share.png" style="width: 17px">
+                    </div>
+                    <div class="item-content">
+                        <p>
+                            No data shared with third parties, about how developers declare sharing
+                        </p>
+                    </div>
+                </div>
+                <div class="description__data-safety__item">
+                    <div class="item-icon"><img alt="" src="./images/download/ic_cloud_upload.png" style="width: 23px">
+                    </div>
+                    <div class="item-content">
+                        <p>
+                            This app may collect these data types, Location, App activity and 2 others
+                        </p>
+                    </div>
+                </div>
+                <div class="description__data-safety__item">
+                    <div class="item-icon"><img alt="" src="./images/download/ic_lock.png" style="width: 16px"></div>
+                    <div class="item-content">
+                        <p>
+                            Data is encrypted in transit.
+                        </p>
+                    </div>
+                </div>
+                <div class="description__data-safety__item">
+                    <div class="item-icon"><img alt="" src="./images/download/ic_delete.png" style="width: 16px">
+                    </div>
+                    <div class="item-content">
+                        <p>
+                            You can request that data be deleted.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="template-footer">
+        <ul>
+            <li>
+                <a>
+                    <p><img width="24" src="./images/download/game.svg" alt=""></p>
+                    <span>
+                        Games
+                    </span>
+                </a>
+            </li>
+            <li class="active">
+                <a>
+                    <p><img width="24" src="./images/download/app.svg" alt=""></p>
+                    <span>
+                        Apps
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <p><img width="24" src="./images/download/file.svg" alt=""></p>
+                    <span>
+                        Movies
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <p><img width="24" src="./images/download/book.svg" alt=""></p>
+                    <span>
+                        Books
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <p><img width="24" src="./images/download/child.svg" alt=""></p>
+                    <span>
+                        Kids
+                    </span>
+                </a>
+
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+{
+	"name": "Kindlotto",
+	"description": "Welcome to Kindlotto, the ultimate destination for online gaming enthusiasts!",
+	"lang": "en",
+	"categories": [],
+	"start_url": "https://m.kindlotto.com/en/?ml=sqrpwafbinr_v2&%3Bisapp=1&isapp=1",
+	"scope": "./",
+	"display": "standalone",
+	"theme_color": "#0b0d11",
+	"background_color": "#0b0d11",
+	"icons": [
+		{
+			"src": "https://m.kindlotto.com/assets/img/landing/icon-192x192.png?v=2024001301",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "https://m.kindlotto.com/assets/img/landing/icon-256x256.png?v=2024001301",
+			"sizes": "256x256",
+			"type": "image/png"
+		},
+		{
+			"src": "https://m.kindlotto.com/assets/img/landing/icon-384x384.png?v=2024001301",
+			"sizes": "384x384",
+			"type": "image/png"
+		},
+		{
+			"src": "https://m.kindlotto.com/assets/img/landing/icon-512x512.png?v=2024001301",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"display_Override": ["window-controls-overlay"],
+	"edge_side_panel": { "preferred_width": 496 },
+	"screenshots": [
+		{
+			"src": "https://m.kindlotto.com/assets/img/landing/en/screenshot1.png?v=2024001301",
+			"sizes": "330x587",
+			"type": "image/png"
+		},
+		{
+			"src": "https://m.kindlotto.com/assets/img/landing/en/screenshot2.png?v=2024001301",
+			"sizes": "330x587",
+			"type": "image/png"
+		},
+		{
+			"src": "https://m.kindlotto.com/assets/img/landing/en/screenshot3.png?v=2024001301",
+			"sizes": "330x587",
+			"type": "image/png"
+		},
+		{
+			"src": "https://m.kindlotto.com/assets/img/landing/en/screenshot4.png?v=2024001301",
+			"sizes": "330x587",
+			"type": "image/png"
+		}
+	],
+	"prefer_related_applications": true,
+	"related_applications": [
+		{
+			"platform": "webapp",
+			"url": "https://m.kindlotto.com/en/landing/manifest.json?ml=sqrpwafbinr_v2&%3Bisapp=1&isapp=1"
+		}
+	]
+}
