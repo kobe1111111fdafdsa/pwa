@@ -20,13 +20,19 @@
     <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
     <script>
+        let deferredPrompt = null;
+
         document.addEventListener("DOMContentLoaded", function () {
 
             // 监听的安装前事件
-            let deferredPrompt = null;
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
+
+                // 未安装
+                console.log('未安装')
+                document.getElementById("install-btn").style.display = 'block'
+                document.getElementById("play-btn").style.display = 'none'
             });
 
             // 监听安装完成事件
@@ -34,14 +40,20 @@
                 console.log('安装完成')
             });
 
-            // 判断是否安装了
+            // 判断是否通过pwa方式打开的
             if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-                console.log('已安装')
+                // pwa方式打开，跳转到游戏页面
+                console.log('pwa打开')
                 window.location.href = './index.html'
+            } else {
+                console.log('浏览器打开')
+                // 浏览器打开，跳转到下载页面
+                window.location.href = './download.html'
             }
 
             // 安装到桌面
             async function installToDesktop () {
+                // 如果不是chrom浏览器，或者已经安装了就不执行
                 if (!deferredPrompt) {
                     console.log('安装事件不存在');
                     return;
@@ -56,9 +68,6 @@
                 if (choiceResult.outcome === 'accepted') {
                     // 接受安装
                     console.log('接受安装')
-                    document.getElementById("install-btn").style.display = 'none'
-                    document.getElementById("disabled-btn").style.display = 'block'
-                    document.getElementById("play-btn").style.display = 'none'
                 } else {
                     // 拒绝安装
                     console.log('拒绝安装')
@@ -71,19 +80,22 @@
             // 点击下载按钮，判断ios或者安卓
             document.getElementById("install-btn").addEventListener("click", async (e) => {
                 // 判断是否pwa模式
-                if (!window.matchMedia('(display-mode: standalone)').matches && !window.navigator.standalone === true) {
-                    const ua = navigator.userAgent || navigator.vendor || window.opera;
-                    if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-                        // ios
-                        window.location.href = './iosDownload.html'
-                    } else if (/android/i.test(ua)) {
-                        // android
-                        installToDesktop()
-                    } else {
-                        // browser
-                        installToDesktop()
-                    }
+                const ua = navigator.userAgent || navigator.vendor || window.opera;
+                if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+                    // ios
+                    window.location.href = './iosDownload.html'
+                } else if (/android/i.test(ua)) {
+                    // android
+                    installToDesktop()
+                } else {
+                    // browser
+                    installToDesktop()
                 }
+            });
+
+            // 点击pay按钮
+            document.getElementById("install-btn").addEventListener("click", async (e) => {
+                window.location.href = 'intent://https://kobe1111111fdafdsa.github.io/pwa/index.html#Intent;scheme=https;package=com.android.chrome;end';
             });
         });
     </script>
@@ -127,7 +139,7 @@
                 <div class="info__view-label">18+</div>
             </div>
         </div>
-        <div class="install-btn shiny-btn" id="install-btn">
+        <div class="install-btn shiny-btn" id="install-btn" style="display: none;">
             <div class="install-btn__ing">
                 <div class="install-btn__ing__rapid">
                     <img alt="" class="ic_x" src="./images/download/ic_sd.png">
@@ -146,7 +158,7 @@
         <div class="install-btn-disabled" id="disabled-btn" style="display: none;">
             Being Installed
         </div>
-        <div class="install-btn-open" id="play-btn" style="display: none;">
+        <div class="install-btn-open" id="play-btn" style="display: block;">
             Play
         </div>
         <ul class="google-share-btns">
