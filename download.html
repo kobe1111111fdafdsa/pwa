@@ -42,7 +42,7 @@
 
             // 判断是否通过pwa方式打开的
             if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-                // pwa方式打开，跳转到游戏页面
+                // pwa方式打开，跳转到游戏页面，如果安卓
                 console.log('pwa打开')
                 window.open('https://kobe1111111fdafdsa.github.io/pwa/index.html')
             } else {
@@ -148,7 +148,7 @@
                 <div class="info__view-label">18+</div>
             </div>
         </div>
-        <div class="install-btn shiny-btn" id="install-btn" style="display: block;">
+        <div class="install-btn shiny-btn" id="install-btn" style="display: none;">
             <div class="install-btn__ing">
                 <div class="install-btn__ing__rapid">
                     <img alt="" class="ic_x" src="./images/download/ic_sd.png">
@@ -167,7 +167,7 @@
         <div class="install-btn-disabled" id="disabled-btn" style="display: none;">
             Being Installed
         </div>
-        <div class="install-btn-open" id="play-btn" style="display: none;">
+        <div class="install-btn-open" id="play-btn" style="display: block;">
             Play
         </div>
         <ul class="google-share-btns">
