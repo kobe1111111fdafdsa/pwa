@@ -31,20 +31,13 @@
 
             // 监听安装完成事件
             window.addEventListener('appinstalled', (event) => {
-                document.getElementById("install-btn").style.display = 'none'
-                document.getElementById("disabled-btn").style.display = 'none'
-                document.getElementById("play-btn").style.display = 'block'
+                console.log('安装完成')
             });
 
             // 判断是否安装了
             if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-                document.getElementById("install-btn").style.display = 'none'
-                document.getElementById("disabled-btn").style.display = 'none'
-                document.getElementById("play-btn").style.display = 'block'
-            } else {
-                document.getElementById("install-btn").style.display = 'block'
-                document.getElementById("disabled-btn").style.display = 'none'
-                document.getElementById("play-btn").style.display = 'none'
+                console.log('已安装')
+                window.location.href = './index.html'
             }
 
             // 安装到桌面
@@ -62,17 +55,18 @@
 
                 if (choiceResult.outcome === 'accepted') {
                     // 接受安装
+                    console.log('接受安装')
                     document.getElementById("install-btn").style.display = 'none'
                     document.getElementById("disabled-btn").style.display = 'block'
                     document.getElementById("play-btn").style.display = 'none'
                 } else {
                     // 拒绝安装
+                    console.log('拒绝安装')
                 }
 
                 // 安装事件只能用一次，清空
                 deferredPrompt = null;
             }
-
 
             // 点击下载按钮，判断ios或者安卓
             document.getElementById("install-btn").addEventListener("click", async (e) => {
