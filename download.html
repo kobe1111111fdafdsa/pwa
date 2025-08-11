@@ -21,6 +21,7 @@
 
     <script>
         let deferredPrompt = null;
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
 
         document.addEventListener("DOMContentLoaded", function () {
 
@@ -31,9 +32,15 @@
 
                 // 未安装
                 console.log('未安装')
-                document.getElementById("install-btn").style.display = 'block'
-                document.getElementById("play-btn").style.display = 'none'
             });
+
+            setTimeout(() => {
+                // 判断是否安装了并且不是ios设备
+                if (!deferredPrompt && !(/iPad|iPhone|iPod/.test(ua) && !window.MSStream)) {
+                    document.getElementById("install-btn").style.display = 'none'
+                    document.getElementById("play-btn").style.display = 'block'
+                }
+            }, 1000)
 
             // 监听安装完成事件
             window.addEventListener('appinstalled', (event) => {
@@ -77,14 +84,13 @@
 
             // 点击下载按钮，判断ios或者安卓
             document.getElementById("install-btn").addEventListener("click", async (e) => {
-                // 判断是否pwa模式
-                const ua = navigator.userAgent || navigator.vendor || window.opera;
-                if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-                    // ios
-                    window.open('https://kobe1111111fdafdsa.github.io/pwa/iosDownload.html')
-                } else if (/android/i.test(ua)) {
+                // 判断pc，安卓，ios设备
+                if (/android/i.test(ua)) {
                     // android
                     installToDesktop()
+                } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+                    // ios
+                    window.open('https://kobe1111111fdafdsa.github.io/pwa/iosDownload.html')
                 } else {
                     // browser
                     installToDesktop()
@@ -96,7 +102,7 @@
                 // 判断pc，安卓，ios设备
                 const ua = navigator.userAgent || navigator.vendor || window.opera;
                 if (/android/i.test(ua)) {
-                    // 安卓
+                    // android
                     window.open('intent://kobe1111111fdafdsa.github.io/pwa/index.html#Intent;scheme=https;package=com.android.chrome;end')
                 } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
                     // ios
@@ -148,7 +154,7 @@
                 <div class="info__view-label">18+</div>
             </div>
         </div>
-        <div class="install-btn shiny-btn" id="install-btn" style="display: none;">
+        <div class="install-btn shiny-btn" id="install-btn" style="display: block;">
             <div class="install-btn__ing">
                 <div class="install-btn__ing__rapid">
                     <img alt="" class="ic_x" src="./images/download/ic_sd.png">
@@ -164,10 +170,7 @@
                 </div>
             </div>
         </div>
-        <div class="install-btn-disabled" id="disabled-btn" style="display: none;">
-            Being Installed
-        </div>
-        <div class="install-btn-open" id="play-btn" style="display: block;">
+        <div class="install-btn-open" id="play-btn" style="display: none;">
             Play
         </div>
         <ul class="google-share-btns">
