@@ -22,15 +22,30 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
-            // 监听pwa的安装事件
+            // 监听的安装前事件
             let deferredPrompt = null;
             window.addEventListener('beforeinstallprompt', (e) => {
-                // 阻止浏览器默认的安装提示
                 e.preventDefault();
-
-                // 保存事件，后续调用
                 deferredPrompt = e;
             });
+
+            // 监听安装完成事件
+            window.addEventListener('appinstalled', (event) => {
+                document.getElementById("install-btn").style.display = 'none'
+                document.getElementById("disabled-btn").style.display = 'none'
+                document.getElementById("play-btn").style.display = 'block'
+            });
+
+            // 判断是否安装了
+            if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+                document.getElementById("install-btn").style.display = 'none'
+                document.getElementById("disabled-btn").style.display = 'none'
+                document.getElementById("play-btn").style.display = 'block'
+            } else {
+                document.getElementById("install-btn").style.display = 'block'
+                document.getElementById("disabled-btn").style.display = 'none'
+                document.getElementById("play-btn").style.display = 'none'
+            }
 
             // 安装到桌面
             async function installToDesktop () {
@@ -46,9 +61,12 @@
                 const choiceResult = await deferredPrompt.userChoice;
 
                 if (choiceResult.outcome === 'accepted') {
-                    console.log('用户接受安装');
+                    // 接受安装
+                    document.getElementById("install-btn").style.display = 'none'
+                    document.getElementById("disabled-btn").style.display = 'block'
+                    document.getElementById("play-btn").style.display = 'none'
                 } else {
-                    console.log('用户拒绝安装');
+                    // 拒绝安装
                 }
 
                 // 安装事件只能用一次，清空
@@ -57,7 +75,7 @@
 
 
             // 点击下载按钮，判断ios或者安卓
-            document.getElementById("download_btn").addEventListener("click", async (e) => {
+            document.getElementById("install-btn").addEventListener("click", async (e) => {
                 // 判断是否pwa模式
                 if (!window.matchMedia('(display-mode: standalone)').matches && !window.navigator.standalone === true) {
                     const ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -116,7 +134,7 @@
             </div>
         </div>
         <div class="install-btn shiny-btn" id="install-btn">
-            <div class="install-btn__ing" id="download_btn">
+            <div class="install-btn__ing">
                 <div class="install-btn__ing__rapid">
                     <img alt="" class="ic_x" src="./images/download/ic_sd.png">
                     <span data-t="rapid_install">
@@ -130,6 +148,12 @@
                     <span class="countdown-num">10</span>s
                 </div>
             </div>
+        </div>
+        <div class="install-btn-disabled" id="disabled-btn" style="display: none;">
+            Being Installed
+        </div>
+        <div class="install-btn-open" id="play-btn" style="display: none;">
+            Play
         </div>
         <ul class="google-share-btns">
             <li>
