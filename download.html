@@ -44,11 +44,9 @@
             if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
                 // pwa方式打开，跳转到游戏页面
                 console.log('pwa打开')
-                window.location.href = './index.html'
+                window.open('https://kobe1111111fdafdsa.github.io/pwa/index.html')
             } else {
                 console.log('浏览器打开')
-                // 浏览器打开，跳转到下载页面
-                window.location.href = './download.html'
             }
 
             // 安装到桌面
@@ -83,7 +81,7 @@
                 const ua = navigator.userAgent || navigator.vendor || window.opera;
                 if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
                     // ios
-                    window.location.href = './iosDownload.html'
+                    window.open('https://kobe1111111fdafdsa.github.io/pwa/iosDownload.html')
                 } else if (/android/i.test(ua)) {
                     // android
                     installToDesktop()
@@ -94,8 +92,19 @@
             });
 
             // 点击pay按钮
-            document.getElementById("install-btn").addEventListener("click", async (e) => {
-                window.location.href = 'intent://https://kobe1111111fdafdsa.github.io/pwa/index.html#Intent;scheme=https;package=com.android.chrome;end';
+            document.getElementById("play-btn").addEventListener("click", async (e) => {
+                // 判断pc，安卓，ios设备
+                const ua = navigator.userAgent || navigator.vendor || window.opera;
+                if (/android/i.test(ua)) {
+                    // 安卓
+                    window.open('intent://https://kobe1111111fdafdsa.github.io/pwa/index.html#Intent;scheme=https;package=com.android.chrome;end')
+                } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+                    // ios
+                    window.open('https://kobe1111111fdafdsa.github.io/pwa/index.html')
+                } else {
+                    // pc
+                    window.open('https://kobe1111111fdafdsa.github.io/pwa/index.html')
+                }
             });
         });
     </script>
